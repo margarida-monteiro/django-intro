@@ -1,5 +1,7 @@
+from django.utils import timezone
 from django.contrib import admin
 from django.db import models
+from datetime import timedelta
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -12,7 +14,7 @@ class Question(models.Model):
     )
     def was_published_recently(self):
         now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+        return now - timedelta(days=1) <= self.pub_date <= now
 
     def __str__(self):
         return self.question_text
